@@ -21,9 +21,6 @@ public class WebApp {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response message(){
-        Collection<Comment> comments = commentService.get();
-        GenericEntity<Collection<Comment>> myEntity = new GenericEntity<Collection<Comment>>(comments){};
-
-        return Response.status(200).entity(myEntity).build();
+        
     }
 }
