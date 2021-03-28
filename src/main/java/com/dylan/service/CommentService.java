@@ -26,5 +26,5 @@ public interface CommentService {
       * PUT a user comment to be stored.
       * @param comment The comment
       */
-     void putComment(Comment comment);
+     Comment putComment(Comment comment);
 }

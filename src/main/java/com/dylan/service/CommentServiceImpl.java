@@ -37,9 +37,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void putComment(Comment comment) {
+    public Comment putComment(Comment comment) {
         try {
-            db.saveComment(comment);
+            return db.saveComment(comment);
         } catch (SQLException e) {
             throw new RuntimeException(String.format("failed to store comment %s",
                     comment.toString(), e));

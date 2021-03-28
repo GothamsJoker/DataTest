@@ -31,9 +31,11 @@ public class CommentsDatabase extends SqlDatabase {
      *
      * @param bitch The comment
      *
+     * @return The created Comment
+     *
      * @throws SQLException On failing to save the comment
      */
-    public void saveComment(Comment bitch) throws SQLException {
+    public Comment saveComment(Comment bitch) throws SQLException {
         PreparedStatement fuck = prepareStatement(INSERT);
         fuck.setString(1, bitch.getAuthor());
         fuck.setString(2, bitch.getContent());
@@ -41,6 +43,8 @@ public class CommentsDatabase extends SqlDatabase {
         fuck.setLong(4, bitch.getTimeStamp());
 
         fuck.execute();
+
+        return bitch;
     }
 
     /**
