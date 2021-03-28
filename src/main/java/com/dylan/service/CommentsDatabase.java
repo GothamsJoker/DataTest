@@ -1,19 +1,18 @@
 package com.dylan.service;
 
-import com.dylan.database.Database;
+import com.dylan.database.SqlDatabase;
 import com.dylan.model.Comment;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
 
 /**
  * Allows reading and writing comments to/from a persistent database.
  */
-public class CommentsDatabase {
+public class CommentsDatabase extends SqlDatabase {
 
     private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS comment(author STRING," +
             " content STRING, pageId INT, timestamp LONG)";
@@ -23,18 +22,8 @@ public class CommentsDatabase {
     private static final String INSERT = "INSERT INTO comment (author, content, pageId, " +
             "timestamp) VALUES (?, ?, ?, ?)";
 
-
-    private final Database database;
-
-    public CommentsDatabase(Database database) throws SQLException {
-        this.database = database;
-        createTable();
-    }
-
-    private void createTable() throws SQLException {
-        // create ya fuckin table on start up
-        Statement statement = database.getConnection().createStatement();
-        statement.executeUpdate(CREATE_TABLE);
+    public CommentsDatabase() {
+        super(CREATE_TABLE);
     }
 
     /**
@@ -45,7 +34,7 @@ public class CommentsDatabase {
      * @throws SQLException On failing to save the comment
      */
     public void saveComment(Comment bitch) throws SQLException {
-        PreparedStatement fuck = database.prepareStatement(INSERT);
+        PreparedStatement fuck = prepareStatement(INSERT);
         fuck.setString(1, bitch.getAuthor());
         fuck.setString(2, bitch.getContent());
         fuck.setInt(3, bitch.getPageId());
@@ -60,7 +49,7 @@ public class CommentsDatabase {
      * @throws SQLException On failing to read the comments.
      */
     public Collection<Comment> readComments() throws SQLException{
-        PreparedStatement st = database.prepareStatement(SELECT);
+        PreparedStatement st = prepareStatement(SELECT);
         ResultSet rs = st.executeQuery();
 
         Collection<Comment> comments = new HashSet<>();
@@ -82,7 +71,7 @@ public class CommentsDatabase {
      * @throws SQLException On failing to read the comments.
      */
     public Collection<Comment> readComments(int pageId) throws SQLException{
-        PreparedStatement st = database.prepareStatement(SELECT_BY_PAGE);
+        PreparedStatement st = prepareStatement(SELECT_BY_PAGE);
         st.setInt(1, pageId);
         ResultSet rs = st.executeQuery();
 

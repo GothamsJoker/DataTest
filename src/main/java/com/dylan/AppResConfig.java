@@ -7,7 +7,6 @@ import javax.ws.rs.ApplicationPath;
 public class AppResConfig extends ResourceConfig {
 
     public AppResConfig(){
-
         packages(true, "com.dylan");
     }
 }

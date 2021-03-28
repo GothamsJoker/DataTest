@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @Path("comments")
 public class WebApp {
-    
+
     @Inject
     private CommentService commentService;
 

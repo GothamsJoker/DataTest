@@ -10,9 +10,13 @@ import java.sql.SQLException;
 public interface Database {
 
     /**
-     * @return a {@link Connection} to the database
+     * Get a {@link Connection} to the database.
+     *
+     * @return The connection.
+     *
+     * @throws SQLException Upon failing to get the connection
      */
-    Connection getConnection();
+    Connection getConnection() throws SQLException;
 
     /**
      * Prepare a statement to send to the database.
