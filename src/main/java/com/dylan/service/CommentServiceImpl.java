@@ -1,13 +1,14 @@
 package com.dylan.service;
 
-import com.dylan.database.CommentsDatabase;
 import com.dylan.model.Comment;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
+/**
+ * A {@link CommentService} that uses an {@link CommentsDatabase} to store and retrieve user
+ * comments.
+ */
 public class CommentServiceImpl implements CommentService {
 
     private final CommentsDatabase db;
@@ -15,13 +16,33 @@ public class CommentServiceImpl implements CommentService {
     public CommentServiceImpl(CommentsDatabase db){
         this.db = db;
     }
-    @Override
-    public Collection<Comment> findAll()  {
 
+    @Override
+    public Collection<Comment> get()  {
         try {
             return db.readComments();
-        } catch (SQLException throwables) {
-            throw new RuntimeException(throwables);
+        } catch (SQLException e) {
+            throw new RuntimeException("failed to read comments from the database", e);
+        }
+    }
+
+    @Override
+    public Collection<Comment> getByPage(int pageId) {
+        try {
+            return db.readComments(pageId);
+        } catch (SQLException e) {
+            throw new RuntimeException(String.format("failed to read comments for page id %s",
+                    pageId), e);
+        }
+    }
+
+    @Override
+    public void putComment(Comment comment) {
+        try {
+            db.saveComment(comment);
+        } catch (SQLException e) {
+            throw new RuntimeException(String.format("failed to store comment %s",
+                    comment.toString(), e));
         }
     }
 }

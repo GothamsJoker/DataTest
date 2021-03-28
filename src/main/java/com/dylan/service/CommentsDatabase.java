@@ -1,5 +1,6 @@
-package com.dylan.database;
+package com.dylan.service;
 
+import com.dylan.database.Database;
 import com.dylan.model.Comment;
 
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class CommentsDatabase {
+
     private final Database database;
 
     public CommentsDatabase(Database database) throws SQLException {
@@ -28,8 +30,6 @@ public class CommentsDatabase {
         fuck.execute();
     }
 
-
-
     public Collection<Comment> readComments() throws SQLException{
         Statement st = database.getConnection().createStatement();
         String query = "select author, content, pageId, timestamp from comment";
@@ -45,6 +45,7 @@ public class CommentsDatabase {
         }
         return comments;
     }
+
     public Collection<Comment> readComments(int pageId) throws SQLException{
         PreparedStatement st = database.prepareStatement("SELECT author, content, pageId, timestamp FROM comment WHERE pageId = ?");
         st.setInt(1, pageId);

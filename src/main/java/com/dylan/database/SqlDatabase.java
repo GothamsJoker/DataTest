@@ -5,14 +5,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-class SqlDatabase implements Database {
+/**
+ * An implementation of {@link Database} that connects to an SQLite database
+ */
+public class SqlDatabase implements Database {
+
     private final Connection connection;
 
-    public SqlDatabase(String driver) throws SQLException{
+    public SqlDatabase() throws SQLException{
         // get connection
-            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\dylan\\test.db");
+        connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\dylan\\test.db");
     }
-
 
     @Override
     public Connection getConnection() {
@@ -22,6 +25,5 @@ class SqlDatabase implements Database {
     @Override
     public PreparedStatement prepareStatement(String query) throws SQLException {
         return connection.prepareStatement(query);
-
     }
 }

@@ -11,19 +11,17 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
-import java.util.List;
 
 @Path("comments")
-public class MyResource {
-
+public class WebApp {
+    
     @Inject
     private CommentService commentService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response message(){
-
-        Collection<Comment> comments = commentService.findAll();
+        Collection<Comment> comments = commentService.get();
         GenericEntity<Collection<Comment>> myEntity = new GenericEntity<Collection<Comment>>(comments){};
 
         return Response.status(200).entity(myEntity).build();

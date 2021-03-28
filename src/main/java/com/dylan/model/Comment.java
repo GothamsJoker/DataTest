@@ -2,6 +2,9 @@ package com.dylan.model;
 
 import java.util.Objects;
 
+/**
+ * A comment stored on a web page.
+ */
 public class Comment {
 
     private final String author;
