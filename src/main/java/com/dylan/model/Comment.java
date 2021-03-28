@@ -1,3 +1,5 @@
+package com.dylan.model;
+
 import java.util.Objects;
 
 public class Comment {
@@ -33,7 +35,7 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "com.dylan.model.Comment{" +
                 "author='" + author + '\'' +
                 ", content='" + content + '\'' +
                 ", pageId=" + pageId +

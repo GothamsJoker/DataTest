@@ -1,3 +1,6 @@
+package com.dylan.database;
+
+import com.dylan.model.Comment;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -5,9 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 
-class CommentsDatabase {
+public class CommentsDatabase {
     private final Database database;
 
     public CommentsDatabase(Database database) throws SQLException {
