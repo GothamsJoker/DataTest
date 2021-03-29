@@ -7,6 +7,7 @@ import java.util.Objects;
  */
 public class Comment {
 
+
     private final String author;
     private final String content;
     private final int pageId;

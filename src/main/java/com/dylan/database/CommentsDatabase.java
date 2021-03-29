@@ -90,6 +90,9 @@ public class CommentsDatabase extends SqlDatabase {
         return comments;
     }
 
+   /*
+   Use (rs query) to locate column names to place into objects
+    */
     private Comment parseComment(ResultSet rs) throws SQLException {
         String auth = rs.getString("author");
         String con = rs.getString("content");
