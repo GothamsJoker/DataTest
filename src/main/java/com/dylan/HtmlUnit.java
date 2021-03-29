@@ -55,10 +55,13 @@ public class HtmlUnit {
 
                 // Write to file and remove element tags probably a better way to do this such as string list
                 FileWriter myWriter = new FileWriter(fileName);
-                myWriter.write(String.valueOf(titles).replaceAll("<p>", "").replaceAll("<a",
-                        "").replaceAll("</p>", "")
-                        .replaceAll("</a>", "").replaceAll("<b>", "")
-                        .replaceAll("</b", "").replaceAll("<i>", "")
+                myWriter.write(String.valueOf(titles).replaceAll("<p>", "")
+                        .replaceAll("<a", "")
+                        .replaceAll("</p>", "")
+                        .replaceAll("</a>", "")
+                        .replaceAll("<b>", "")
+                        .replaceAll("</b", "")
+                        .replaceAll("<i>", "")
                         .replaceAll("</i>", ""));
                 System.out.println("File has been written to");
 
