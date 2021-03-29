@@ -36,4 +36,9 @@ public abstract class SqlDatabase implements Database {
     public PreparedStatement prepareStatement(String query) throws SQLException {
         return connection.prepareStatement(query);
     }
+
+    @Override
+    public void shutdown() throws SQLException {
+        connection.close();
+    }
 }

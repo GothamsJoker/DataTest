@@ -1,8 +1,9 @@
-package com.dylan.service;
+package com.dylan.database;
 
-import com.dylan.database.SqlDatabase;
 import com.dylan.model.Comment;
 
+import javax.inject.Inject;
+import javax.ws.rs.ext.Provider;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.HashSet;
 /**
  * Allows reading and writing comments to/from a persistent database.
  */
+@Provider
 public class CommentsDatabase extends SqlDatabase {
 
     private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS comment(author STRING," +
@@ -22,6 +24,7 @@ public class CommentsDatabase extends SqlDatabase {
     private static final String INSERT = "INSERT INTO comment (author, content, pageId, " +
             "timestamp) VALUES (?, ?, ?, ?)";
 
+    @Inject
     public CommentsDatabase() {
         super(CREATE_TABLE);
     }

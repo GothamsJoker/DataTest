@@ -1,7 +1,10 @@
 package com.dylan.service;
 
+import com.dylan.database.CommentsDatabase;
 import com.dylan.model.Comment;
 
+import javax.inject.Inject;
+import javax.ws.rs.ext.Provider;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -9,13 +12,11 @@ import java.util.Collection;
  * A {@link CommentService} that uses an {@link CommentsDatabase} to store and retrieve user
  * comments.
  */
+@Provider
 public class CommentServiceImpl implements CommentService {
 
-    private final CommentsDatabase db;
-
-    public CommentServiceImpl(CommentsDatabase db){
-        this.db = db;
-    }
+    @Inject
+    private CommentsDatabase db;
 
     @Override
     public Collection<Comment> get()  {

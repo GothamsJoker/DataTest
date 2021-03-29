@@ -10,7 +10,8 @@ import java.sql.SQLException;
 public interface Database {
 
     /**
-     * Get a {@link Connection} to the database.
+     * Get a {@link Connection} to the database. Prefer {@link Database#prepareStatement(String)}
+     * over directly getting a connection yourself.
      *
      * @return The connection.
      *
@@ -26,5 +27,10 @@ public interface Database {
      * @throws SQLException Upon failing to connect to the database
      */
     PreparedStatement prepareStatement(String query) throws SQLException;
+
+    /**
+     * Closes the {@link Connection} and shuts down the database.
+     */
+    void shutdown() throws SQLException;
 
 }
