@@ -14,7 +14,6 @@ public class Comment {
     private final long timeStamp;
 
     public Comment(String author, String content, int pageId, long timeStamp) {
-
         this.timeStamp = timeStamp;
         this.author = author;
         this.content = content;
