@@ -1,6 +1,5 @@
-package com.dylan.service.com.dylan.webscraper;
+package com.dylan.webscraper;
 
-import com.dylan.webscraper.WebScraper;
 import org.junit.Test;
 
 import java.io.IOException;
