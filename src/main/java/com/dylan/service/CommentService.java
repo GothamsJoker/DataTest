@@ -21,6 +21,7 @@ public interface CommentService {
       * @return all of the user comments across all pages.
       */
      @GET
+     @Path("/all")
      @Produces(MediaType.APPLICATION_JSON)
      Collection<Comment> get();
 
@@ -31,7 +32,7 @@ public interface CommentService {
       * @return A {@link Collection} of comments.
       */
      @GET
-     @Path("/{pageId}")
+     @Path("{pageId}")
      @Produces(MediaType.APPLICATION_JSON)
      Collection<Comment> getByPage(@PathParam("pageId") int pageId);
 
@@ -40,6 +41,7 @@ public interface CommentService {
       * @param comment The comment
       */
      @POST
-     @Consumes(MediaType.APPLICATION_JSON)
+     @Path("/create")
+     @Produces(MediaType.APPLICATION_JSON)
      Comment putComment(Comment comment);
 }

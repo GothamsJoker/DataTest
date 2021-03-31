@@ -10,25 +10,43 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import static com.dylan.Main.BASE_PATH;
+import java.net.URI;
+
+import static com.dylan.Main.BASE_URI;
 import static org.junit.Assert.assertEquals;
 
 public class CommentServiceImplTest extends JerseyTest {
 
+    static {
+        System.setProperty("jersey.config.test.container.port", "8080");
+    }
+
     @Override
     protected Application configure() {
-        return new ResourceConfig().packages("java.dylan").register(new ApplicationBinder());
+        return new ResourceConfig().packages("com.dylan").register(new ApplicationBinder());
+    }
+
+    @Override
+    protected URI getBaseUri() {
+        return URI.create(BASE_URI);
     }
 
     @Test
     public void it_posts_comment() {
         Comment c = new Comment("com/dylan", "eat my ass", 1, System.currentTimeMillis());
-        Response response = target(BASE_PATH + "/comments").request().post(Entity.entity(c,
+        Response response = target("/comments/create/").request().post(Entity.entity(c,
                 MediaType.APPLICATION_JSON));
         Comment posted = response.readEntity(Comment.class);
 
         assertEquals("HTTP Response code should be a 201, indicating the request completed" +
                 " with no error.", 201, response.getStatus());
         assertEquals("Posted service should match what we submitted", c, posted);
+    }
+
+    @Test
+    public void it_reads_comments() {
+        Response r = target("/comments/all").request().get();
+
+        assertEquals("asdf response", 201, r.getStatus());
     }
 }

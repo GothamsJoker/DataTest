@@ -2,8 +2,11 @@ package com.dylan;
 
 import com.dylan.database.CommentsDatabase;
 import com.dylan.service.CommentService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
@@ -17,7 +20,7 @@ import java.net.URI;
 public class Main {
 
     public static final String BASE_PATH = "/app";
-    private static final String BASE_URI = "http://localhost:8080" + BASE_PATH;
+    public static final String BASE_URI = "http://localhost:8080" + BASE_PATH;
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
@@ -25,10 +28,19 @@ public class Main {
      * @return The Grizzly HTTP server.
      */
     public static HttpServer startServer() {
+        // create custom ObjectMapper
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        // create JsonProvider to provide custom ObjectMapper
+        JacksonJaxbJsonProvider provider = new JacksonJaxbJsonProvider();
+        provider.setMapper(mapper);
+
         // create a resource config that scans for JAX-RS resources and providers
         // in com.example.rest package
         final ResourceConfig rc = new ResourceConfig().register(CommentsDatabase.class,
                 CommentService.class);
+        rc.register(provider);
 
         // setup the binder that creates our key services
         rc.register(new ApplicationBinder());

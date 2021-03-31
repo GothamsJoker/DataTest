@@ -17,7 +17,7 @@ public class ApplicationBinder extends AbstractBinder {
     @Override
     protected void configure() {
         bindFactory(CommentsDatabaseFactory::new).to(CommentsDatabase.class).proxy(true);
-        bindFactory(CommentServiceFactory::new).to(CommentService.class).proxy(true);
+        bindFactory(CommentServiceFactory::new).to(CommentService.class);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.dylan.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 /**
@@ -7,11 +9,17 @@ import java.util.Objects;
  */
 public class Comment {
 
+    @JsonProperty("author")
+    private String author;
+    @JsonProperty("content")
+    private String content;
+    @JsonProperty("pageId")
+    private int pageId;
+    @JsonProperty("timestamp")
+    private long timeStamp;
 
-    private final String author;
-    private final String content;
-    private final int pageId;
-    private final long timeStamp;
+    public Comment() {
+    }
 
     public Comment(String author, String content, int pageId, long timeStamp) {
         this.timeStamp = timeStamp;

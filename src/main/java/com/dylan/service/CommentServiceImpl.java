@@ -12,7 +12,6 @@ import java.util.Collection;
  * A {@link CommentService} that uses an {@link CommentsDatabase} to store and retrieve user
  * comments.
  */
-@Provider
 public class CommentServiceImpl implements CommentService {
 
     @Inject
