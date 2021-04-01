@@ -34,7 +34,7 @@ public class CommentServiceImplTest extends JerseyTest {
         Comment c = new Comment("com/dylan", "eat my ass", 1, System.currentTimeMillis());
         Response response =
                 target("/comments/create/").request(MediaType.APPLICATION_JSON_TYPE).post(Entity.json(c));
-        System.out.println(response.readEntity(String.class));
+        System.out.println(response.readEntity(Comment.class));
 
         assertEquals("HTTP Response code should be a 201, indicating the request completed" +
                 " with no error.", 200, response.getStatus());
