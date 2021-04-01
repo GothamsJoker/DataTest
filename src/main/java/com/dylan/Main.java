@@ -1,6 +1,7 @@
 package com.dylan;
 
 import com.dylan.database.CommentsDatabase;
+import com.dylan.exception.RootExceptionMapper;
 import com.dylan.service.CommentService;
 import com.dylan.service.CommentServiceImpl;
 import com.sun.tools.javac.util.List;
@@ -26,7 +27,8 @@ public class Main extends Application {
         return new HashSet<>(List.of(
                 CommentsDatabase.class,
                 CommentService.class,
-                CommentServiceImpl.class));
+                CommentServiceImpl.class,
+                RootExceptionMapper.class));
     }
 
     @Override
