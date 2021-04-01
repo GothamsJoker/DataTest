@@ -20,7 +20,7 @@ public abstract class SqlDatabase implements Database {
     private void init(String createTable) throws SQLException {
         // get connection
         connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\dylan\\test.db");
-        prepareStatement(createTable);
+        prepareStatement(createTable).execute();
     }
 
     @Override
