@@ -33,6 +33,7 @@ public class CommentServiceImpl implements CommentService {
         try {
             return db.readComments();
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException("failed to read comments from the database", e);
         }
     }
@@ -45,6 +46,7 @@ public class CommentServiceImpl implements CommentService {
         try {
             return db.readComments(pageId);
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(String.format("failed to read comments for page id %s",
                     pageId), e);
         }
@@ -59,6 +61,7 @@ public class CommentServiceImpl implements CommentService {
         try {
             return db.saveComment(comment);
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(String.format("failed to store comment %s",
                     comment.toString(), e));
         }
