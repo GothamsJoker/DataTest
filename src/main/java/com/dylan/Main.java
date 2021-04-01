@@ -4,11 +4,9 @@ import com.dylan.database.CommentsDatabase;
 import com.dylan.exception.RootExceptionMapper;
 import com.dylan.service.CommentService;
 import com.dylan.service.CommentServiceImpl;
-import com.sun.tools.javac.util.List;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,11 +22,11 @@ public class Main extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        return new HashSet<>(List.of(
+        return Stream.of(
                 CommentsDatabase.class,
                 CommentService.class,
                 CommentServiceImpl.class,
-                RootExceptionMapper.class));
+                RootExceptionMapper.class).collect(Collectors.toSet());
     }
 
     @Override
