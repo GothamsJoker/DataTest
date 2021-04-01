@@ -37,13 +37,13 @@ public class CommentServiceImplTest extends JerseyTest {
         System.out.println(response.readEntity(String.class));
 
         assertEquals("HTTP Response code should be a 201, indicating the request completed" +
-                " with no error.", 201, response.getStatus());
+                " with no error.", 200, response.getStatus());
     }
 
     @Test
     public void it_reads_comments() {
         Response r = target("/comments/all").request().get();
 
-        assertEquals("asdf response", 201, r.getStatus());
+        assertEquals("asdf response", 200, r.getStatus());
     }
 }
